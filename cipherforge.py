@@ -20,6 +20,14 @@ def add_digits(word):
     for i in range(1, 10000001):
         ret_list.append(word + str(i))
     return ret_list
+
+## returns list with permuted words capitalized and uppercased
+def caps_perms(permutes):
+    ret_list = []
+    for p in permutes:
+        ret_list.append(upper(p))
+        ret_list.append(capitalize(p))
+    return ret_list 
     
 if __name__ == "__main__":
     file = input(f"{Fore.BLUE}[?] (Optional) output (default: cf_wordlist.txt): ")
