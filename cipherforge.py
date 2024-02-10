@@ -38,3 +38,4 @@ if __name__ == "__main__":
       print(permute_all(s))
       print(rev_word(s)) 
       print(add_digits(s))
+      print(caps_perms(s))
