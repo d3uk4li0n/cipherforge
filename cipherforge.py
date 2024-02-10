@@ -28,7 +28,16 @@ def caps_perms(permutes):
         ret_list.append(upper(p))
         ret_list.append(capitalize(p))
     return ret_list 
-    
+
+def write_to_file(data, file="cf_wordlist.txt"):
+    try:
+        with open(file, "w+") as f:
+            f.write(data)
+    except Exception as e:
+        print(f"{Fore.RED}Exception occurred, could not write to file {file}")
+    file.close()
+    print(f"{Fore.GREEN}[+] Wordlist ready at: {file}")
+
 if __name__ == "__main__":
     file = input(f"{Fore.BLUE}[?] (Optional) output (default: cf_wordlist.txt): ")
     source = input(f"{Fore.BLUE}[?] Insert word list (separated by comma): ").split(", ")
