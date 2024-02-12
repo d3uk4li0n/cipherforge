@@ -29,6 +29,23 @@ def caps_perms(permutes):
         ret_list.append(capitalize(p))
     return ret_list 
 
+## replaces letters with look-alike numbers
+def replace_letters_digits(word):
+    ret_list = []
+    lowercase_dict = {"i":1, "z":2, "e":3,"a": 4, "s":5, "b":8, "o":0}
+    uppercase_dict = {"I":1, "Z":2, "E":3,"A": 4, "S":5, "B":8, "O":0}
+
+    for i in word:
+        for key_l in lowercase_dict:
+            for key_u in uppercase_dict:
+                if i == key_l:
+                    word = word.replace(i, str(lowercase_dict[key_l]))
+                    ret_list.append(word)
+                if i == key_u:
+                    word = word.replace(i, str(uppercase_dict[key_u]))
+                    ret_list.append(word)
+    return set(ret_list)
+
 def write_to_file(data, file="cf_wordlist.txt"):
     try:
         with open(file, "w+") as f:
