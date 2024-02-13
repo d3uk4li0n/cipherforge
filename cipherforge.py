@@ -46,6 +46,7 @@ def replace_letters_digits(word):
                     ret_list.append(word)
     return set(ret_list)
 
+## makes 2 words combinations
 def combine_multiple_words(*words, comb=4):
     ret_list = []
     for i in range(comb):
