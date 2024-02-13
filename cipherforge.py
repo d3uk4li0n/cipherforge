@@ -46,6 +46,15 @@ def replace_letters_digits(word):
                     ret_list.append(word)
     return set(ret_list)
 
+def combine_multiple_words(*words, comb=4):
+    ret_list = []
+    for i in range(comb):
+        curword = words[0]
+        ret_list.append(words[0] + words[i+(i+1)])
+        ret_list.append(words[i+1] + words[0])
+        i += 1
+    return set(ret_list)
+
 def write_to_file(data, file="cf_wordlist.txt"):
     try:
         with open(file, "w+") as f:
