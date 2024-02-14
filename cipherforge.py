@@ -66,7 +66,15 @@ def write_to_file(data, file="cf_wordlist.txt"):
     print(f"{Fore.GREEN}[+] Wordlist ready at: {file}")
 
 if __name__ == "__main__":
+    ## TODO add functions that tackle option for minimum and maximum length
+    min_length = int(input(f"{Fore.BLUE}[?] (Optional) Minimum length: "))
+    max_length = int(input(f"{Fore.BLUE}[?] (Optional) Maximum length: "))
+    add_words = input(f"{Fore.BLUE}[?] (Optional) Do you want to combine words [Y/n]: ") ## makes 2 words combinations
+    if add_words == "Y" or add_words == "y":
+        add_how_many_words = input(f"{Fore.BLUE}[?] How many words do you want to combine [2]: ")
     file = input(f"{Fore.BLUE}[?] (Optional) output (default: cf_wordlist.txt): ")
     source = input(f"{Fore.BLUE}[?] Insert word list (separated by comma): ").split(", ")
     for s in source:
-     
+        write_to_file(s, file)
+        write_to_file(capitalize(s), file)
+        write_to_file(upper(s), file)
