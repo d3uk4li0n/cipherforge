@@ -69,9 +69,4 @@ if __name__ == "__main__":
     file = input(f"{Fore.BLUE}[?] (Optional) output (default: cf_wordlist.txt): ")
     source = input(f"{Fore.BLUE}[?] Insert word list (separated by comma): ").split(", ")
     for s in source:
-      print(capitalize(s))
-      print(upper(s))
-      print(permute_all(s))
-      print(rev_word(s)) 
-      print(add_digits(s))
-      print(caps_perms(s))
+     
