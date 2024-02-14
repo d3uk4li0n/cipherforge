@@ -6,8 +6,8 @@ this repo IS a work in progress, and feedbacks are appreciated
 You're gonna need python3, refer to this for installation https://docs.python-guide.org/starting/install3/linux/  
 
 e.g.  
-cd cipherforge/
-python3 cipherforge.py
+cd cipherforge/  
+python3 cipherforge.py  
 then follow the instructions
 
 ## Disclaimer
