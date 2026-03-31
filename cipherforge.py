@@ -19,7 +19,7 @@ def add_digits(word):
     ret_list = []
     for i in range(1, 10000001):
         ret_list.append(word + str(i))
-    return ret_list
+    yield word + str(i)
 
 ## returns list with permuted words capitalized and uppercased
 def caps_perms(permutes):
@@ -56,12 +56,20 @@ def combine_multiple_words(*words, comb=4):
         i += 1
     return set(ret_list)
 
+def patterns():
+        patterns = [
+        f"{word}123",
+        f"{word}2024",
+        f"{word}!",
+        f"{word}@123",
+        f"{word.capitalize()}123"
+    ]
+    return patterns
+
 def write_to_file(data, file="cf_wordlist.txt"):
-    try:
-        with open(file, "w+") as f:
-            f.write(data)
-    except Exception as e:
-        print(f"{Fore.RED}Exception occurred, could not write to file {file}")
+    with open(file, "a") as f:
+        for item in generator:
+            f.write(item + "\n")
     file.close()
     print(f"{Fore.GREEN}[+] Wordlist ready at: {file}")
 
