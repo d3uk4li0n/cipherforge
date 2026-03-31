@@ -14,7 +14,7 @@ def permute_all(word):
 def rev_word(word):
     return word[::-1]
     
-## add digits from 1 to 1000000
+## TODO fix this function 
 def add_digits(word):
     ret_list = []
     for i in range(1, 10000001):
@@ -56,22 +56,19 @@ def combine_multiple_words(*words, comb=4):
         i += 1
     return set(ret_list)
 
-def patterns():
-        patterns = [
+def patterns(word):
+    return [
         f"{word}123",
         f"{word}2024",
         f"{word}!",
         f"{word}@123",
         f"{word.capitalize()}123"
     ]
-    return patterns
 
-def write_to_file(data, file="cf_wordlist.txt"):
+def write_to_file(generator, file):
     with open(file, "a") as f:
         for item in generator:
             f.write(item + "\n")
-    file.close()
-    print(f"{Fore.GREEN}[+] Wordlist ready at: {file}")
 
 if __name__ == "__main__":
     ## TODO add functions that tackle option for minimum and maximum length
