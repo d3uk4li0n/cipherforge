@@ -56,6 +56,7 @@ def write_to_file(generator, file):
         for item in generator:
             f.write(item + "\n")
 
+## TODO add generate_wordlist function
 if __name__ == "__main__":
     ## TODO add functions that tackle option for minimum and maximum length
     min_length = int(input(f"{Fore.BLUE}[?] (Optional) Minimum length: "))
