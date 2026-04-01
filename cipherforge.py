@@ -14,12 +14,9 @@ def permute_all(word):
 def rev_word(word):
     return word[::-1]
     
-## TODO fix this function 
 def add_digits(word):
-    ret_list = []
     for i in range(1, 10000001):
-        ret_list.append(word + str(i))
-    yield word + str(i)
+        yield f"{word}{i}"
 
 ## returns list with permuted words capitalized and uppercased
 def caps_perms(permutes):
