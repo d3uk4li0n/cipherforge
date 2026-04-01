@@ -1,5 +1,4 @@
 import sys 
-from itertools import permutations
 from colorama import Fore
 
 def capitalize(word):
@@ -14,14 +13,6 @@ def rev_word(word):
 def add_digits(word):
     for i in range(1, 10000001):
         yield f"{word}{i}"
-
-## returns list with permuted words capitalized and uppercased
-def caps_perms(permutes):
-    ret_list = []
-    for p in permutes:
-        ret_list.append(upper(p))
-        ret_list.append(capitalize(p))
-    return ret_list 
 
 ## replaces letters with look-alike numbers
 def replace_letters_digits(word):
@@ -75,6 +66,6 @@ if __name__ == "__main__":
     file = input(f"{Fore.BLUE}[?] (Optional) output (default: cf_wordlist.txt): ")
     source = input(f"{Fore.BLUE}[?] Insert word list (separated by comma): ").split(", ")
     for s in source:
-        write_to_file(s, file)
-        write_to_file(capitalize(s), file)
-        write_to_file(upper(s), file)
+        write_to_file([s], file)
+        write_to_file(patterns(s), file)
+        write_to_file(add_digits(s), file)
