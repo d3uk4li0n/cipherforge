@@ -8,9 +8,6 @@ def capitalize(word):
 def upper(word):
     return word.upper()
 
-def permute_all(word):
-    return ["".join(w) for w in permutations(word)]
-
 def rev_word(word):
     return word[::-1]
     
@@ -62,6 +59,7 @@ def patterns(word):
         f"{word.capitalize()}123"
     ]
 
+# write_to_file(patterns(s), file)
 def write_to_file(generator, file):
     with open(file, "a") as f:
         for item in generator:
