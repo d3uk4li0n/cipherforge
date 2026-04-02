@@ -56,7 +56,6 @@ def write_to_file(generator, file):
         for item in generator:
             f.write(item + "\n")
 
-## TODO add generate_wordlist function
 
 def generate_wordlist(words):
     for word in words:
@@ -71,6 +70,9 @@ def generate_wordlist(words):
             if other != word:
                 yield f"{word}{other}"
                 yield f"{word}_{other}"
+
+gen = generate_wordlist(source)
+write_to_file(gen, file)
 
 '''
 if __name__ == "__main__":
