@@ -9,10 +9,21 @@ def upper(word):
 
 def rev_word(word):
     return word[::-1]
-    
-def add_digits(word):
-    for i in range(1, 10000001):
-        yield f"{word}{i}"
+
+def leet(word):
+    mapping = {
+        "a": ["4", "@"],
+        "e": ["3"],
+        "i": ["1"],
+        "o": ["0"],
+        "s": ["5", "$"]
+    }
+
+    yield word
+    for i, char in enumerate(word):
+        if char.lower() in mapping:
+            for repl in mapping[char.lower()]:
+                yield word[:i] + repl + word[i+1:]
 
 ## replaces letters with look-alike numbers
 def replace_letters_digits(word):
