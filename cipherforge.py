@@ -61,12 +61,10 @@ def patterns(word):
         f"{word.capitalize()}123"
     ]
 
-# write_to_file(patterns(s), file)
 def write_to_file(generator, file):
-    with open(file, "a") as f:
+    with open(file, "w") as f:
         for item in generator:
             f.write(item + "\n")
-
 
 def generate_wordlist(words):
     for word in words:
