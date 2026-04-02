@@ -57,6 +57,22 @@ def write_to_file(generator, file):
             f.write(item + "\n")
 
 ## TODO add generate_wordlist function
+
+def generate_wordlist(words):
+    for word in words:
+        yield word
+        yield word.capitalize()
+        yield word.upper()
+
+        yield from patterns(word)
+        yield from replace_letters_digits(word)
+
+        for other in words:
+            if other != word:
+                yield f"{word}{other}"
+                yield f"{word}_{other}"
+
+'''
 if __name__ == "__main__":
     ## TODO add functions that tackle option for minimum and maximum length
     min_length = int(input(f"{Fore.BLUE}[?] (Optional) Minimum length: "))
@@ -70,3 +86,4 @@ if __name__ == "__main__":
         write_to_file([s], file)
         write_to_file(patterns(s), file)
         write_to_file(add_digits(s), file)
+'''
