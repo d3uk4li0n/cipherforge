@@ -66,18 +66,26 @@ def generate_wordlist(words):
 gen = generate_wordlist(source)
 write_to_file(gen, file)
 
-'''
+def main():
+    parser = argparse.ArgumentParser(description="Custom Wordlist Generator (Cybersecurity Tool)")
+
+    parser.add_argument("--words", required=True,
+                        help="Comma-separated words (eg john,doe,company)")
+    parser.add_argument("--min", type=int, default=0,
+                        help="Minimum length")
+    parser.add_argument("--max", type=int, default=999,
+                        help="Maximum length")
+    parser.add_argument("--output", default="wordlist.txt",
+                        help="Output file")
+
+    args = parser.parse_args()
+
+    words = args.words.split(",")
+
+    gen = generate_wordlist(words, args.min, args.max)
+    write_to_file(gen, args.output)
+
+    print(f"[+] Wordlist saved to {args.output}")
+
 if __name__ == "__main__":
-    ## TODO add functions that tackle option for minimum and maximum length
-    min_length = int(input(f"{Fore.BLUE}[?] (Optional) Minimum length: "))
-    max_length = int(input(f"{Fore.BLUE}[?] (Optional) Maximum length: "))
-    add_words = input(f"{Fore.BLUE}[?] (Optional) Do you want to combine words [Y/n]: ") ## makes 2 words combinations
-    if add_words == "Y" or add_words == "y":
-        add_how_many_words = input(f"{Fore.BLUE}[?] How many words do you want to combine [2]: ")
-    file = input(f"{Fore.BLUE}[?] (Optional) output (default: cf_wordlist.txt): ")
-    source = input(f"{Fore.BLUE}[?] Insert word list (separated by comma): ").split(", ")
-    for s in source:
-        write_to_file([s], file)
-        write_to_file(patterns(s), file)
-        write_to_file(add_digits(s), file)
-'''
+    main()
