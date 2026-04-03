@@ -1,5 +1,4 @@
 import sys 
-from colorama import Fore
 
 def capitalize(word):
     return word.capitalize()
@@ -43,6 +42,10 @@ def patterns(word):
         f"{word}@123",
         f"{word.capitalize()}123"
     ]
+
+def add_digits(word, max_num=1000):
+    for i in range(max_num):
+        yield f"{word}{i}"
 
 def write_to_file(generator, file):
     with open(file, "w") as f:
