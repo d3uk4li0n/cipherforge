@@ -9,20 +9,10 @@ def upper(word):
 def rev_word(word):
     return word[::-1]
 
-def leet(word):
-    mapping = {
-        "a": ["4", "@"],
-        "e": ["3"],
-        "i": ["1"],
-        "o": ["0"],
-        "s": ["5", "$"]
-    }
+def add_digits(word, max_num=1000):
+    for i in range(max_num):
+        yield f"{word}{i}"
 
-    yield word
-    for i, char in enumerate(word):
-        if char.lower() in mapping:
-            for repl in mapping[char.lower()]:
-                yield word[:i] + repl + word[i+1:]
 
 ## makes 2 words combinations
 def combine_multiple_words(*words, comb=4):
@@ -43,9 +33,20 @@ def patterns(word):
         f"{word.capitalize()}123"
     ]
 
-def add_digits(word, max_num=1000):
-    for i in range(max_num):
-        yield f"{word}{i}"
+def leet(word):
+    mapping = {
+        "a": ["4", "@"],
+        "e": ["3"],
+        "i": ["1"],
+        "o": ["0"],
+        "s": ["5", "$"]
+    }
+
+    yield word
+    for i, char in enumerate(word):
+        if char.lower() in mapping:
+            for repl in mapping[char.lower()]:
+                yield word[:i] + repl + word[i+1:]
 
 def write_to_file(generator, file):
     with open(file, "w") as f:
