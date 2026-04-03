@@ -48,7 +48,7 @@ def leet(word):
             for repl in mapping[char.lower()]:
                 yield word[:i] + repl + word[i+1:]
 
-def write_to_file(generator, file):
+def write_to_file(generator, file="wordlist.txt"):
     with open(file, "w") as f:
         for item in generator:
             f.write(item + "\n")
