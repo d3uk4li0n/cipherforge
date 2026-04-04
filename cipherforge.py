@@ -1,4 +1,5 @@
 import sys 
+import argparse 
 
 def capitalize(word):
     return word.capitalize()
@@ -48,11 +49,6 @@ def leet(word):
             for repl in mapping[char.lower()]:
                 yield word[:i] + repl + word[i+1:]
 
-def write_to_file(generator, file="wordlist.txt"):
-    with open(file, "w") as f:
-        for item in generator:
-            f.write(item + "\n")
-
 def generate_wordlist(words):
     for word in words:
         yield word
@@ -67,14 +63,50 @@ def generate_wordlist(words):
                 yield f"{word}{other}"
                 yield f"{word}_{other}"
 
-gen = generate_wordlist(source)
-write_to_file(gen, file)
+def generate_wordlist(words, min_len=0, max_len=999):
+    seen = set()
+
+    for word in words:
+        candidates = []
+
+        # base transformations
+        candidates.append(word)
+        candidates.append(capitalize(word))
+        candidates.append(upper(word))
+        candidates.append(rev_word(word))
+
+        # patterns
+        candidates.extend(patterns(word))
+
+        # leetspeak
+        candidates.extend(list(leet(word)))
+
+        # combinations
+        for other in words:
+            if other != word:
+                candidates.append(f"{word}{other}")
+                candidates.append(f"{word}_{other}")
+
+        # digits (limited for sanity)
+        candidates.extend(add_digits(word, max_num=100))
+
+        # filtering + dedup
+        for candidate in candidates:
+            if candidate not in seen and min_len <= len(candidate) <= max_len:
+                seen.add(candidate)
+                yield candidate
+
+
+def write_to_file(generator, file):
+    with open(file, "w") as f:
+        for item in generator:
+            f.write(item + "\n")
 
 def main():
     parser = argparse.ArgumentParser(description="Custom Wordlist Generator (Cybersecurity Tool)")
 
     parser.add_argument("--words", required=True,
-                        help="Comma-separated words (eg john,doe,company)")
+                        help="Comma-separated words (e.g. john,doe,company)")
     parser.add_argument("--min", type=int, default=0,
                         help="Minimum length")
     parser.add_argument("--max", type=int, default=999,
