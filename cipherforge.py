@@ -14,7 +14,6 @@ def add_digits(word, max_num=1000):
     for i in range(max_num):
         yield f"{word}{i}"
 
-
 ## makes 2 words combinations
 def combine_multiple_words(*words, comb=4):
     ret_list = []
@@ -48,20 +47,6 @@ def leet(word):
         if char.lower() in mapping:
             for repl in mapping[char.lower()]:
                 yield word[:i] + repl + word[i+1:]
-
-def generate_wordlist(words):
-    for word in words:
-        yield word
-        yield word.capitalize()
-        yield word.upper()
-
-        yield from patterns(word)
-        yield from replace_letters_digits(word)
-
-        for other in words:
-            if other != word:
-                yield f"{word}{other}"
-                yield f"{word}_{other}"
 
 def generate_wordlist(words, min_len=0, max_len=999):
     seen = set()
