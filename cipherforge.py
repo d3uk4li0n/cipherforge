@@ -1,5 +1,4 @@
-import sys 
-import argparse 
+import argparse
 
 def capitalize(word):
     return word.capitalize()
@@ -10,19 +9,6 @@ def upper(word):
 def rev_word(word):
     return word[::-1]
 
-def add_digits(word, max_num=1000):
-    for i in range(max_num):
-        yield f"{word}{i}"
-
-## makes 2 words combinations
-def combine_multiple_words(*words, comb=4):
-    ret_list = []
-    for i in range(comb):
-        curword = words[0]
-        ret_list.append(words[0] + words[i+(i+1)])
-        ret_list.append(words[i+1] + words[0])
-        i += 1
-    return set(ret_list)
 
 def patterns(word):
     return [
@@ -32,6 +18,7 @@ def patterns(word):
         f"{word}@123",
         f"{word.capitalize()}123"
     ]
+
 
 def leet(word):
     mapping = {
@@ -48,23 +35,28 @@ def leet(word):
             for repl in mapping[char.lower()]:
                 yield word[:i] + repl + word[i+1:]
 
+
+def add_digits(word, max_num=100):
+    for i in range(max_num):
+        yield f"{word}{i}"
+
 def generate_wordlist(words, min_len=0, max_len=999):
     seen = set()
 
     for word in words:
-        candidates = []
-
         # base transformations
-        candidates.append(word)
-        candidates.append(capitalize(word))
-        candidates.append(upper(word))
-        candidates.append(rev_word(word))
+        candidates = [
+            word,
+            capitalize(word),
+            upper(word),
+            rev_word(word)
+        ]
 
         # patterns
         candidates.extend(patterns(word))
 
         # leetspeak
-        candidates.extend(list(leet(word)))
+        candidates.extend(leet(word))
 
         # combinations
         for other in words:
@@ -72,15 +64,14 @@ def generate_wordlist(words, min_len=0, max_len=999):
                 candidates.append(f"{word}{other}")
                 candidates.append(f"{word}_{other}")
 
-        # digits (limited for sanity)
-        candidates.extend(add_digits(word, max_num=100))
+        # digits (controlled)
+        candidates.extend(add_digits(word))
 
-        # filtering + dedup
+        # filtering + deduplication
         for candidate in candidates:
             if candidate not in seen and min_len <= len(candidate) <= max_len:
                 seen.add(candidate)
                 yield candidate
-
 
 def write_to_file(generator, file):
     with open(file, "w") as f:
@@ -88,20 +79,39 @@ def write_to_file(generator, file):
             f.write(item + "\n")
 
 def main():
-    parser = argparse.ArgumentParser(description="Custom Wordlist Generator (Cybersecurity Tool)")
+    parser = argparse.ArgumentParser(
+        description="Custom Wordlist Generator (Dictionary Attack Tool)"
+    )
 
-    parser.add_argument("--words", required=True,
-                        help="Comma-separated words (e.g. john,doe,company)")
-    parser.add_argument("--min", type=int, default=0,
-                        help="Minimum length")
-    parser.add_argument("--max", type=int, default=999,
-                        help="Maximum length")
-    parser.add_argument("--output", default="wordlist.txt",
-                        help="Output file")
+    parser.add_argument(
+        "--words",
+        required=True,
+        help="Comma-separated words (e.g. john,doe,company)"
+    )
+
+    parser.add_argument(
+        "--min",
+        type=int,
+        default=0,
+        help="Minimum password length"
+    )
+
+    parser.add_argument(
+        "--max",
+        type=int,
+        default=999,
+        help="Maximum password length"
+    )
+
+    parser.add_argument(
+        "--output",
+        default="wordlist.txt",
+        help="Output file"
+    )
 
     args = parser.parse_args()
 
-    words = args.words.split(",")
+    words = [w.strip() for w in args.words.split(",") if w.strip()]
 
     gen = generate_wordlist(words, args.min, args.max)
     write_to_file(gen, args.output)
