@@ -9,7 +9,6 @@ def upper(word):
 def rev_word(word):
     return word[::-1]
 
-
 def patterns(word):
     return [
         f"{word}123",
@@ -18,7 +17,6 @@ def patterns(word):
         f"{word}@123",
         f"{word.capitalize()}123"
     ]
-
 
 def leet(word):
     mapping = {
